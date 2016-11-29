@@ -1,6 +1,6 @@
 FROM anapsix/alpine-java:8_jdk
 
-RUN apk update && apk add git curl gosu
+RUN apk update && apk add git curl
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
