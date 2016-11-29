@@ -1,6 +1,6 @@
 FROM anapsix/alpine-java:8_jdk
 
-RUN apk update && apk add git curl
+RUN apk update && apk add git curl gosu
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
@@ -14,7 +14,7 @@ ARG gid=1000
 # If you bind mount a volume from the host or a data container, 
 # ensure you use the same uid
 RUN addgroup -g ${gid} ${group} \
-    && adduser -D -u ${uid} -G ${group} ${user}
+    && adduser -D -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash ${user}
 
 # Jenkins home directory is a volume, so configuration and build history 
 # can be persisted and survive image upgrades
